@@ -9,18 +9,27 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    emailTextController = TextEditingController();
-    passwordTextController = TextEditingController();
+    emailTextController = TextEditingController(text: 'leo@gmail.com');
+    passwordTextController = TextEditingController(text: '123');
     super.onInit();
   }
 
   void apiLogin() async {
     Get.dialog(Center(child: CircularProgressIndicator()), barrierDismissible: false);
-    Requests request =
-        Requests(url: urlLogin, body: {'email': emailTextController.text, 'password': passwordTextController.text});
+    Requests request = Requests(
+      url: urlLogin,
+      body: {
+        'email': emailTextController.text,
+        'password': passwordTextController.text,
+      },
+    );
     request.post().then((value) {
+      print('value do post ${value.body}');
       Get.back();
-      Get.offNamed('/homeView');
+      Get.offNamed(
+        '/homeView',
+        arguments: value,
+      );
     }).catchError((onError) {});
   }
 

@@ -1,3 +1,4 @@
+import 'package:apicomgetx/view/home.dart';
 import 'package:apicomgetx/view/login.dart';
 import 'package:get/get.dart';
 
@@ -7,9 +8,9 @@ class Routers {
       name: '/loginView',
       page: () => LoginView(),
     ),
-    /*GetPage(
+    GetPage(
       name: '/homeView',
-      //page: () => HomeView(),
-    ),*/
+      page: () => HomeView(),
+    ),
   ];
 }

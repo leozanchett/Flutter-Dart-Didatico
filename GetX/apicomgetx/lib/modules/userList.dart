@@ -14,10 +14,12 @@ class UserListModel {
     total = json['total'];
     totalPages = json['total_pages'];
     if (json['data'] != null) {
-      data = new List<Data>();
-      json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
-      });
+      data = <Data>[];
+      json['data'].forEach(
+        (v) {
+          data.add(new Data.fromJson(v));
+        },
+      );
     }
     ad = json['ad'] != null ? new Ad.fromJson(json['ad']) : null;
   }
