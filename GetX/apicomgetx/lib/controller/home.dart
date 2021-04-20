@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   RxList<Data> userListData = <Data>[].obs;
   RxBool loading = false.obs;
-  RxInt pagAtual = 0.obs;
+  int pagAtual = 0;
   @override
   void onInit() {
     _apiGetUserList();
@@ -23,9 +23,10 @@ class HomeController extends GetxController {
     Requests request = Requests(url: urlUserList + pagAtual.toString(), body: null);
     request.get().then((value) {
       UserListModel userListModel = UserListModel.fromJson(json.decode(value.body));
-      pagAtual.value = userListModel.page;
+      pagAtual = userListModel.page;
       userListData.value = userListModel.data;
       loading.value = false;
+      update();
       Get.back();
     }).catchError((onError) {
       print(onError);

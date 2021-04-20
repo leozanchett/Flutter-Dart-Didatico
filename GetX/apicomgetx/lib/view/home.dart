@@ -37,11 +37,11 @@ class HomeView extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Obx(
-              () => Flexible(
+            GetBuilder<HomeController>(
+              builder: (value) => Flexible(
                 flex: 1,
                 child: Text(
-                  'Pág: ${_homeController.pagAtual.value.toString()}',
+                  'Pág: ${value.pagAtual.toString()}',
                   style: TextStyle(fontSize: 11),
                 ),
               ),
@@ -86,22 +86,22 @@ class HomeView extends StatelessWidget {
           ),
           Align(
             alignment: FractionalOffset.bottomCenter,
-            child: Obx(
-              () => Row(
+            child: GetBuilder<HomeController>(
+              builder: (value) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    splashColor: (_homeController.pagAtual.value > 1) ? Colors.grey : Colors.transparent,
-                    highlightColor: (_homeController.pagAtual.value > 1) ? Colors.grey : Colors.transparent,
-                    color: (_homeController.pagAtual.value == 1) ? Colors.black.withOpacity(0.2) : Colors.black,
+                    splashColor: (value.pagAtual > 1) ? Colors.grey : Colors.transparent,
+                    highlightColor: (value.pagAtual > 1) ? Colors.grey : Colors.transparent,
+                    color: (value.pagAtual == 1) ? Colors.black.withOpacity(0.2) : Colors.black,
                     icon: Icon(Icons.arrow_back_ios_outlined),
-                    onPressed: () => (_homeController.pagAtual.value > 1) ? _homeController.previusPage() : null,
+                    onPressed: () => (value.pagAtual > 1) ? value.previusPage() : null,
                   ),
                   IconButton(
                     splashColor: Colors.grey,
                     highlightColor: Colors.grey,
                     icon: Icon(Icons.arrow_forward_ios),
-                    onPressed: () => (_homeController.pagAtual.value >= 1) ? _homeController.nextPage() : null,
+                    onPressed: () => (value.pagAtual >= 1) ? value.nextPage() : null,
                   ),
                 ],
               ),
