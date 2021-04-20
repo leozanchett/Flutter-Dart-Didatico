@@ -24,7 +24,6 @@ class LoginController extends GetxController {
       },
     );
     request.post().then((value) {
-      print('value do post ${value.body}');
       Get.back();
       Get.offNamed(
         '/homeView',

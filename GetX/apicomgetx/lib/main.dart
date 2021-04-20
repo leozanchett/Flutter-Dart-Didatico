@@ -1,10 +1,15 @@
+import 'package:apicomgetx/controller/login.dart';
 import 'package:apicomgetx/modules/rotas.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'controller/home.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+  Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
   runApp(
     GetMaterialApp(
       title: 'GetX APP',

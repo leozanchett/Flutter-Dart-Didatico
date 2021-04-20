@@ -5,25 +5,24 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeView extends StatelessWidget {
-  final dynamic value;
-  HomeView({this.value});
   final LoginController _loginController = Get.find();
+  final HomeController _homeController = Get.find<HomeController>();
+  final dynamic argumentos = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    final HomeController _homeController = Get.put(HomeController());
-    print('value $value');
-    print(_loginController.emailTextController.text);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Dashboard',
         ),
+        centerTitle: true,
       ),
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(children: [
+          Text('Argumento: $argumentos'),
           Row(children: <Widget>[
             Flexible(
               fit: FlexFit.tight,
