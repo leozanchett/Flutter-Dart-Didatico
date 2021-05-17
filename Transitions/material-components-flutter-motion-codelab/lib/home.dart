@@ -90,8 +90,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       value: 0,
       vsync: this,
     )..addListener(() {
-        if (_drawerController.status == AnimationStatus.dismissed &&
-            _drawerController.value == 0) {
+        if (_drawerController.status == AnimationStatus.dismissed && _drawerController.value == 0) {
           Provider.of<EmailStore>(
             context,
             listen: false,
@@ -164,8 +163,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   bool get _bottomDrawerVisible {
     final status = _drawerController.status;
-    return status == AnimationStatus.completed ||
-        status == AnimationStatus.forward;
+    return status == AnimationStatus.completed || status == AnimationStatus.forward;
   }
 
   void _toggleBottomDrawerVisibility() {
@@ -186,8 +184,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   double get _bottomDrawerHeight {
-    final renderBox =
-        _bottomDrawerKey.currentContext.findRenderObject() as RenderBox;
+    final renderBox = _bottomDrawerKey.currentContext.findRenderObject() as RenderBox;
     return renderBox.size.height;
   }
 
@@ -196,13 +193,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void _handleDragEnd(DragEndDetails details) {
-    if (_drawerController.isAnimating ||
-        _drawerController.status == AnimationStatus.completed) {
+    if (_drawerController.isAnimating || _drawerController.status == AnimationStatus.completed) {
       return;
     }
 
-    final flingVelocity =
-        details.velocity.pixelsPerSecond.dy / _bottomDrawerHeight;
+    final flingVelocity = details.velocity.pixelsPerSecond.dy / _bottomDrawerHeight;
 
     if (flingVelocity < 0.0) {
       _drawerController.fling(
@@ -218,8 +213,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         _dropArrowController.forward();
       }
       _drawerController.fling(
-        velocity:
-            _drawerController.value < 0.6 ? -_kFlingVelocity : _kFlingVelocity,
+        velocity: _drawerController.value < 0.6 ? -_kFlingVelocity : _kFlingVelocity,
       );
     }
   }
@@ -396,8 +390,7 @@ class _AnimatedBottomAppBar extends StatelessWidget {
                               : FadeTransition(
                                   opacity: fadeOut,
                                   child: Selector<EmailStore, String>(
-                                    selector: (context, emailStore) =>
-                                        emailStore.currentlySelectedInbox,
+                                    selector: (context, emailStore) => emailStore.currentlySelectedInbox,
                                     builder: (
                                       context,
                                       currentlySelectedInbox,
@@ -405,10 +398,7 @@ class _AnimatedBottomAppBar extends StatelessWidget {
                                     ) {
                                       return Text(
                                         currentlySelectedInbox,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            .copyWith(
+                                        style: Theme.of(context).textTheme.bodyText1.copyWith(
                                               color: ReplyColors.white50,
                                             ),
                                       );
@@ -465,14 +455,11 @@ class _BottomAppBarActionItems extends StatelessWidget {
 
           if (model.emails[model.currentlySelectedInbox].isNotEmpty) {
             currentEmailStarred = model.isEmailStarred(
-              model.emails[model.currentlySelectedInbox]
-                  .elementAt(model.currentlySelectedEmailId),
+              model.emails[model.currentlySelectedInbox].elementAt(model.currentlySelectedEmailId),
             );
           }
 
-          starIconColor = currentEmailStarred
-              ? Theme.of(context).colorScheme.secondary
-              : ReplyColors.white50;
+          starIconColor = currentEmailStarred ? Theme.of(context).colorScheme.secondary : ReplyColors.white50;
         }
 
         // TODO: Add Fade through transition between bottom app bar actions (Motion)
@@ -592,8 +579,7 @@ class _BottomDrawerDestinations extends StatelessWidget {
               dropArrowController.forward();
             },
             child: Selector<EmailStore, String>(
-              selector: (context, emailStore) =>
-                  emailStore.currentlySelectedInbox,
+              selector: (context, emailStore) => emailStore.currentlySelectedInbox,
               builder: (context, currentlySelectedInbox, child) {
                 return ListTile(
                   leading: ImageIcon(
@@ -637,8 +623,7 @@ class _Destination {
 }
 
 class _BottomDrawerFolderSection extends StatelessWidget {
-  const _BottomDrawerFolderSection({@required this.folders})
-      : assert(folders != null);
+  const _BottomDrawerFolderSection({@required this.folders}) : assert(folders != null);
 
   final Map<String, String> folders;
 
@@ -679,14 +664,11 @@ class _MailRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RootBackButtonDispatcher backButtonDispatcher =
-        Router.of(context).backButtonDispatcher as RootBackButtonDispatcher;
+    final RootBackButtonDispatcher backButtonDispatcher = Router.of(context).backButtonDispatcher as RootBackButtonDispatcher;
 
     return Router(
-      routerDelegate:
-          MailViewRouterDelegate(drawerController: drawerController),
-      backButtonDispatcher: ChildBackButtonDispatcher(backButtonDispatcher)
-        ..takePriority(),
+      routerDelegate: MailViewRouterDelegate(drawerController: drawerController),
+      backButtonDispatcher: ChildBackButtonDispatcher(backButtonDispatcher)..takePriority(),
     );
   }
 }
@@ -716,8 +698,7 @@ class _ReplyFab extends StatefulWidget {
   _ReplyFabState createState() => _ReplyFabState();
 }
 
-class _ReplyFabState extends State<_ReplyFab>
-    with SingleTickerProviderStateMixin {
+class _ReplyFabState extends State<_ReplyFab> with SingleTickerProviderStateMixin {
   // TODO: Add Fade through transition between compose and reply FAB (Motion)
   static const double _mobileFabDimension = 56;
 
